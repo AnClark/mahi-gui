@@ -127,8 +127,13 @@ install(TARGETS clipper EXPORT mahi-gui-targets
 #===============================================================================
 
 include(FetchContent)
-FetchContent_Declare(mahi-util GIT_REPOSITORY https://github.com/mahilab/mahi-util.git)
+FetchContent_Declare(mahi-util GIT_REPOSITORY git://github.com/mahilab/mahi-util.git)
 FetchContent_MakeAvailable(mahi-util)
+
+# Disable coroutine support on GCC
+if(CMAKE_COMPILER_IS_GNUCC)
+    set (MAHI_UTIL_COROUTINES OFF CACHE BOOL "" FORCE)
+endif()
 
 #===============================================================================
 # CREATE LIBRARY
